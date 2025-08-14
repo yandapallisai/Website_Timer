@@ -15,37 +15,18 @@
 
     <h1>Website Launching Soon!</h1>
     <div id="countdown" class="countdown-container">
-        </div>
+        {% if is_live %}
+            WE ARE LIVE!
+        {% else %}
+            <div>{{ days }}<span>Days</span></div>
+            <div>{{ hours }}<span>Hours</span></div>
+            <div>{{ minutes }}<span>Minutes</span></div>
+            <div>{{ seconds }}<span>Seconds</span></div>
+        {% endif %}
+    </div>
 
-    <script>
-        // Get the launch date from the Python backend
-        const launchDate = new Date("{{ launch_date }}").getTime();
-
-        // Update the countdown every 1 second
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-
-            // Calculate days, hours, minutes, and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the result
-            document.getElementById("countdown").innerHTML = 
-                `<div>${days}<span>Days</span></div>` +
-                `<div>${hours}<span>Hours</span></div>` +
-                `<div>${minutes}<span>Minutes</span></div>` +
-                `<div>${seconds}<span>Seconds</span></div>`;
-
-            // If the countdown is finished, display a message
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "WE ARE LIVE!";
-            }
-        }, 1000);
-    </script>
+    <!-- Removed JavaScript setInterval for real-time update -->
+    <!-- The countdown will now only update when the page is refreshed -->
 
 </body>
 </html>
