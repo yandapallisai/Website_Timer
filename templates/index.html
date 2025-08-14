@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Launch</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        h1 { font-size: 2.5em; }
+        .countdown-container div { display: inline-block; font-size: 3em; margin: 10px; }
+        .countdown-container span { display: block; font-size: 0.5em; }
+    </style>
+</head>
+<body>
+
+    <h1>Website Launching Soon!</h1>
+    <div id="countdown" class="countdown-container">
+        </div>
+
+    <script>
+        // Get the launch date from the Python backend
+        const launchDate = new Date("{{ launch_date }}").getTime();
+
+        // Update the countdown every 1 second
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("countdown").innerHTML = 
+                `<div>${days}<span>Days</span></div>` +
+                `<div>${hours}<span>Hours</span></div>` +
+                `<div>${minutes}<span>Minutes</span></div>` +
+                `<div>${seconds}<span>Seconds</span></div>`;
+
+            // If the countdown is finished, display a message
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "WE ARE LIVE!";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
