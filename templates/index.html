@@ -15,14 +15,12 @@
 
     <h1>Website Launching Soon!</h1>
     <div id="countdown" class="countdown-container">
-        {% if is_live %}
-            WE ARE LIVE!
-        {% else %}
+        
             <div>{{ days }}<span>Days</span></div>
             <div>{{ hours }}<span>Hours</span></div>
             <div>{{ minutes }}<span>Minutes</span></div>
             <div>{{ seconds }}<span>Seconds</span></div>
-        {% endif %}
+       
     </div>
 
     <!-- Removed JavaScript setInterval for real-time update -->
