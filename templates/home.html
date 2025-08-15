@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Launch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: rgb(104, 104, 240);
+            color: black;
+            padding: 15px 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: white;
+            margin: 5px 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Countdown Section */
+        main {
+            flex: 1;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .countdown-container div {
+            display: inline-block;
+            font-size: 3em;
+            margin: 10px;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 100px;
+        }
+        .countdown-container span {
+            display: block;
+            font-size: 0.5em;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .countdown-container div { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h1 id="title">Website Launching Soon!</h1>
+        <div id="countdown" class="countdown-container"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Your Company Name. All rights reserved.
+    </footer>
+
+    <!-- Countdown Script -->
+    <script>
+        const launchTime = {{ launch_timestamp }};
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            let distance = launchTime - now;
+
+            if (distance <= 0) {
+                document.getElementById("countdown").innerHTML =
+                    `<a href="/home" style="font-size:2em; color:blue; text-decoration:none;">
+                        Click this link
+                     </a>`;
+                clearInterval(timer); // stop the countdown
+                document.getElementById("title").innerHTML = "Site is now live!";
+                return;
+            }
+
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `<div>${days}<span>Days</span></div>` +
+                `<div>${hours}<span>Hours</span></div>` +
+                `<div>${minutes}<span>Minutes</span></div>` +
+                `<div>${seconds}<span>Seconds</span></div>`;
+        }
+
+        updateCountdown();
+        const timer = setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>

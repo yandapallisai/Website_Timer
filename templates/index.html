@@ -13,20 +13,43 @@
 </head>
 <body>
 
-    <h1>Website Launching Soon!</h1>
-    <div id="countdown" class="countdown-container">
-        {% if is_live %}
-            WE ARE LIVE!
-        {% else %}
-            <div>{{ days }}<span>Days</span></div>
-            <div>{{ hours }}<span>Hours</span></div>
-            <div>{{ minutes }}<span>Minutes</span></div>
-            <div>{{ seconds }}<span>Seconds</span></div>
-        {% endif %}
-    </div>
+    <h1 id="title">Website Launching Soon!</h1>
+    <div id="countdown" class="countdown-container"></div>
 
-    <!-- Removed JavaScript setInterval for real-time update -->
-    <!-- The countdown will now only update when the page is refreshed -->
+    <script>
+        const launchTime = {{ launch_timestamp }};
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            let distance = launchTime - now;
+
+            if (distance <= 0) {
+    document.getElementById("countdown").innerHTML = 
+        `<a href="/home" style="font-size:2em; color:blue; text-decoration:none;">
+            Click this link
+         </a>`;
+    clearInterval(timer); // stop the countdown
+    document.getElementById("title").innerHTML="site is now live";
+    return;
+}
+
+
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `<div>${days}<span>Days</span></div>` +
+                `<div>${hours}<span>Hours</span></div>` +
+                `<div>${minutes}<span>Minutes</span></div>` +
+                `<div>${seconds}<span>Seconds</span></div>`;
+        }
+
+        // Update every second
+        updateCountdown();
+        const timer = setInterval(updateCountdown, 1000);
+    </script>
 
 </body>
 </html>
