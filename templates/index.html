@@ -5,35 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Launch</title>
     <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-        h1 { font-size: 2.5em; }
-        .countdown-container div { display: inline-block; font-size: 3em; margin: 10px; }
-        .countdown-container span { display: block; font-size: 0.5em; }
+       
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #001f3f, #1a2a4c);
+            color: #ffffff;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .countdown-container div {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            font-size: 3.5em;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            min-width: 140px;
+            transition: transform 0.3s ease;
+        }
+
+        .countdown-container div:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-container span {
+            display: block;
+            font-size: 0.3em;
+            margin-top: 10px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        #countdown a {
+            font-size: 2em;
+            color: #87ceeb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        #countdown a:hover {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
 
-    <h1 id="title">Website Launching Soon!</h1>
+    <h1 id="title">Website Launching Soon! 🚀</h1>
     <div id="countdown" class="countdown-container"></div>
 
     <script>
-        const launchTime = {{ launch_timestamp }};
+        // Use a placeholder timestamp for demonstration.
+        // You can replace this with your specific launch date and time.
+        // Example timestamp: January 1, 2026, 10:00:00 AM IST
+        const launchTime = {{launch_timestamp}};
 
         function updateCountdown() {
             const now = new Date().getTime();
             let distance = launchTime - now;
 
             if (distance <= 0) {
-                document.getElementById("title").innerHTML="site is now live";
-    document.getElementById("countdown").innerHTML = 
-        `<a href="/home" style="font-size:2em; color:blue; text-decoration:none;">
-            Click this link
-         </a>`;
-    clearInterval(timer); // stop the countdown
-    
-    return;
-}
-
+                document.getElementById("title").innerHTML = "Our site is now live! 🎉";
+                document.getElementById("countdown").innerHTML = 
+                    `<a href="/home">Click here to enter</a>`;
+                clearInterval(timer);
+                return;
+            }
 
             let days = Math.floor(distance / (1000 * 60 * 60 * 24));
             let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -47,9 +111,8 @@
                 `<div>${seconds}<span>Seconds</span></div>`;
         }
 
-        // Update every second
         updateCountdown();
-        const timer = setInterval(updateCountdown, 1000);
+        setInterval(updateCountdown, 1000);
     </script>
 
 </body>

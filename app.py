@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def countdown():
     # Set your launch date
-    launch_date_obj = datetime.datetime(2025, 8, 15, 11, 10, 0)
+    launch_date_obj = datetime.datetime(2025, 8, 15, 20, 35, 0)
     # Pass timestamp in milliseconds for JavaScript
     launch_timestamp = int(launch_date_obj.timestamp() * 1000)
     return render_template('index.html', launch_timestamp=launch_timestamp)
